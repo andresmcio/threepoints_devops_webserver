@@ -1,8 +1,4 @@
-FROM alpine
-
-RUN addgroup -S nonroot \ && adduser -S nonroot -G nonroot
-
-USER nonroot
+FROM node:18-alpine
 
 WORKDIR /usr/src/app
 
