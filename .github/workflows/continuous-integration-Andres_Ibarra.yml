@@ -1,0 +1,26 @@
+
+name: continous-integration-Andres_Ibarra
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Pruebas de SAST
+        run: echo "Ejecución de pruebas de SAST"
+
+      - name: Create credentials.ini
+        run: echo "USERNAME=${{ secrets.USERNAME }}" > credentials.ini && echo "PASSWORD=${{ secrets.PASSWORD }}" >> credentials.ini
+
+      - name: Build Docker image
+        run: |
+          docker build -t devops_ws . --tag devops_ws_$(date +%s)
+          docker image ls
