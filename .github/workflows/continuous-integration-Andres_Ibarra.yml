@@ -12,13 +12,19 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Pruebas de SAST
         run: echo "Ejecución de pruebas de SAST"
 
       - name: Create credentials.ini
         run: echo "USERNAME=${{ secrets.USERNAME }}" > credentials.ini && echo "PASSWORD=${{ secrets.PASSWORD }}" >> credentials.ini
+
+      - name: Almacenamiento de artefacto credentials.ini
+        uses: actions/upload-artifact@v3
+        with:
+          name: credentials-almacenamiento
+          path: credentials.ini
 
       - name: Build Docker image
         run: |
